@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { request} from "../../../apiFacade";
 
 const ErrorProvoker = ({ setErrorMessage, setShowRenderError }) => {
   
@@ -13,14 +14,12 @@ const ErrorProvoker = ({ setErrorMessage, setShowRenderError }) => {
 
   const handleAsyncError = async () => {
     try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/404");
-      if (!response.ok) {
-        throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
-      }
-      await response.json();
+      const data = await request("/nonexistent-endpoint", "GET", null, false);
+      console.log('This data will never be shown: ',data); // Should be setData(data) if you want to use it, but here we just want to provoke an error
+
     } catch (error) {
       console.error("Caught async error:", error);
-      setErrorMessage(error.message);
+      setErrorMessage(error.message || error.error || "An unknown error occurred during the async operation.");
     }
   };
 
