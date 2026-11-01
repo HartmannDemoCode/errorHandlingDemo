@@ -1,49 +1,65 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Outlet } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./assets/components/ErrorFallBack";
+import RenderErrorDemo from "./assets/components/RenderErrorDemo";
 
-import ErrorBanner from "./ErrorBanner";
-import ErrorProvoker from "./ErrorProvoker";
+import ErrorBanner from "./assets/components/ErrorBanner";
+import ErrorProvoker from "./assets/components/ErrorProvoker";
+import ErrorPage from "./assets/components/ErrorPage";
 import { setupGlobalErrorHandlers } from "./globalErrorHandling";
 
-function ErrorFallback({ error, resetErrorBoundary }) {
-  return (
-    <div role="alert" style={{ backgroundColor: "#fee2e2", color: "#7f1d1d", padding: "1rem", margin: "1rem 0" }}>
-      <h2>Something went wrong.</h2>
-      <p>{error.message}</p>
-      <button type="button" onClick={resetErrorBoundary}>Try again</button>
-    </div>
-  );
-}
 
 function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [showRenderError, setShowRenderError] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const invalidRoute = !["/", "/articles"].includes(location.pathname);
 
   useEffect(() => {
-    setupGlobalErrorHandlers(setErrorMessage);
+    setupGlobalErrorHandlers(setErrorMessage); // Promise Rejections and TypeErrors etc. 
 
-    return () => {
+    return () => { // Reset global error handlers when the component unmounts
       window.onerror = null;
       window.onunhandledrejection = null;
     };
   }, []);
 
+  const handleResetFromRouteError = () => {
+    setShowRenderError(false);
+    setErrorMessage(null);
+    navigate("/");
+  };
+
   return (
     <div>
-      <ErrorBanner errorMessage={errorMessage} />
-      <ErrorProvoker setErrorMessage={setErrorMessage} setShowRenderError={setShowRenderError} />
-
-      <ErrorBoundary 
-      FallbackComponent={ErrorFallback}
-        onReset={() => {
+      <ErrorBanner
+        errorMessage={errorMessage}
+        onClear={() => {
           setErrorMessage(null);
           setShowRenderError(false);
         }}
-      >
-        <Outlet context={{ showRenderError }} />
-      </ErrorBoundary>
+      />
+      <ErrorProvoker 
+        setErrorMessage={setErrorMessage}
+        setShowRenderError={setShowRenderError}
+      />
+
+      {invalidRoute ? (
+        <ErrorPage onReset={handleResetFromRouteError} />
+      ) : (
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+          onReset={() => {
+            setErrorMessage(null);
+            setShowRenderError(false);
+          }}
+        >
+          <RenderErrorDemo showRenderError={showRenderError} />
+        </ErrorBoundary>
+      )}
     </div>
   );
 }
