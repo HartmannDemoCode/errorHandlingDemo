@@ -196,6 +196,7 @@ If this component throws while React is rendering, we do not want the whole app 
 ---
 
 ## Step 6: Use an Error Boundary
+- (Specifically designed to catch render errors - errors that happen during the rendering phase of React components - not in event handlers or async code)
 
 React has a built-in pattern for this: Error Boundary.
 
@@ -245,13 +246,11 @@ A good practice is to separate the error types:
 - JS runtime errors → banner message
 - render errors → Error Boundary fallback UI
 
-This makes the app easier to understand for students and makes the demo feel realistic.
-
 ---
 
-## Suggested exercise flow for students
+## Suggested exercise flow 
 
-Ask students to build the same pattern in a new app:
+Exercise: Build the same pattern in a new app:
 
 1. Create a form or button that triggers a fetch request
 2. Make the fetch fail with 404 or 500

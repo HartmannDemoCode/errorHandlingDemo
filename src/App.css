@@ -40,3 +40,112 @@
 .read-the-docs {
   color: #888;
 }
+
+.auth-demo-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #111827;
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-demo-page {
+  padding: 1rem;
+}
+
+.auth-demo-back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #111827;
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-demo-card {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.auth-demo-card--missing {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.auth-demo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 300px;
+}
+
+.auth-demo-form input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.auth-demo-button,
+.auth-demo-button-secondary {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.auth-demo-button {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+.auth-demo-button:hover,
+.auth-demo-button-secondary:hover {
+  opacity: 0.9;
+}
+
+.auth-demo-button-secondary {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.auth-demo-results {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #111827;
+  color: #f9fafb;
+  border-radius: 6px;
+  text-align: left;
+  border: 1px solid #374151;
+}
+
+.auth-demo-results pre {
+  white-space: pre-wrap;
+  margin-top: 0.5rem;
+  color: #f9fafb;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.auth-demo-error {
+  margin-top: 1rem;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.auth-demo-status {
+  margin-top: 1rem;
+  color: #111827;
+  font-weight: 600;
+}

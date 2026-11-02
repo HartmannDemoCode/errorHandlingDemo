@@ -102,4 +102,4 @@ async function getData(){
 }
 
 
-export { login, loggedIn, getData, logout, request};
+export { login, loggedIn, getData, logout, request };
